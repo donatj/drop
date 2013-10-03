@@ -5,7 +5,7 @@
 	"keywords": ["debugging", "drop"],
 	"license": "MIT",
 	"require": {
-		"donatj/cli-toolkit": "dev-master",
+		"donatj/cli-toolkit": "*",
 		"php": ">=5.3.0"
 	},
 	"authors": [
