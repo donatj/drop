@@ -15,8 +15,7 @@
 function drop() {
 
 	if( __is_cli() === true ) {
-		CLI\Cursor::rowcol(-1, -1);
-		echo "\n";
+		echo "\033[2J\n";
 	}
 
 	call_user_func_array('see', func_get_args());
