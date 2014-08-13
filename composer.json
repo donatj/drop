@@ -5,7 +5,8 @@
 	"keywords": ["debugging", "drop"],
 	"license": "MIT",
 	"require": {
-		"php": ">=5.3.0"
+		"php": ">=5.3.0",
+		"sebastian/exporter": "1.*"
 	},
 	"authors": [
 		{
