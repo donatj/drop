@@ -5,15 +5,6 @@
  * @author Jesse G. Donat <donatj@gmail.com>
  */
 
-// You can define these your self to get a different pattern
-if( !defined('DROP_CLI_LINK_FORMAT') ) {
-	define('DROP_CLI_LINK_FORMAT', 'file://%s %s');
-}
-
-if( !defined('DROP_WEB_LINK_FORMAT') ) {
-	define('DROP_WEB_LINK_FORMAT', '%s %s');
-}
-
 
 /**
  * A VERY handy function to empty output buffers and take any number of arguments and expose them.
@@ -44,50 +35,17 @@ function see() {
  * after output. Unlike drop(), this function must be "echoed".
  */
 function output_format_args() {
-	$backtrace = debug_backtrace();
-	array_shift($backtrace);
-
-	$file = __FILE__;
-	$line = -1;
-	$func = "";
-	foreach( $backtrace as $trace ) {
-		$file = empty($trace['file']) ? $file : $trace['file'];
-		$line = empty($trace['line']) ? $line : $trace['line'];
-		$func = empty($trace['function']) ? $func : $trace['function'];
-
-		if( $file !== __FILE__ ) {
-			break;
-		}
-	}
-
-	if( __is_cli() ) {
-		$location = sprintf(DROP_CLI_LINK_FORMAT, $file, $line);
-	} else {
-		$location = sprintf(DROP_WEB_LINK_FORMAT, $file, $line);
-	}
-
-	$center_about = function ( $string, $len ) {
-		$string = "    {$string}    ";
-		$len    = $len - strlen($string);
-		$half   = $len / 2;
-
-		return str_repeat("|", floor($half) - 15) . $string . str_repeat("|", ceil($half) + 15);
-	};
-
-	$len   = strlen($location) + 60;
-	$final = $center_about($func, $len) . "\n\n";
-	$final .= $center_about($location, $len) . "\n\n";
-
-	$exporter  = new \SebastianBergmann\Exporter\Exporter;
+	$final     = "";
 	$arguments = func_get_args();
-	if( !empty($arguments) ) {
+	if( is_array($arguments) && !empty($arguments) ) {
 		foreach( $arguments as $i => $argument ) {
-			$final .= $center_about("Arg No. {$i}", $len) . "\n\n\n\n";
-			$export = $exporter->export($argument);
-			$final .= "{$export}\n\n\n\n";
-
+			$final .= sprintf("\n\n%'|21s Arg No. %-2s %'|43s\n\n", "", $i, "");
+			$argument = is_null($argument) ? "(null)null" : $argument;
+			$argument = $argument === false ? "(bool)false" : $argument;
+			$argument = $argument === true ? "(bool)true" : $argument;
+			$final .= sprintf("\n\n%s\n\n", print_r($argument, true));
 		}
-		$final .= $center_about('EOF', $len) . "\n";
+		$final .= sprintf("\n\n%'|21s EOF %'|50s\n\n", "", "");
 
 		return __is_cli() === true ? $final : "<pre>{$final}</pre>";
 	}
@@ -96,5 +54,9 @@ function output_format_args() {
 }
 
 function __is_cli() {
+	if( defined('IS_CLI') ) {
+		return IS_CLI;
+	}
+
 	return substr(strtolower(php_sapi_name()), 0, 3) == 'cli';
 }
