@@ -65,7 +65,7 @@ namespace donatj\drop {
 
 	/**
 	 * Utility function for detecting CLI usage.
-	 * 
+	 *
 	 * @return bool
 	 */
 	function is_cli() : bool {
