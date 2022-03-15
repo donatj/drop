@@ -5,12 +5,13 @@
  * @author Jesse G. Donat <donatj@gmail.com>
  */
 
-
 /**
  * A VERY handy function to empty output buffers and take any number of arguments and expose them.
  * This is particularly helpful for looking into arrays and objects to see what information lies
  * within. This function will also kill the script after echoing the information. This function
  * takes any number of any typed arguments and displays them all.
+ *
+ * @return void
  */
 function drop() {
 
@@ -25,6 +26,8 @@ function drop() {
 /**
  * A handy function to expose any number of any typed arguments while NOT killing the script
  * after output.
+ *
+ * @return void
  */
 function see() {
 	echo call_user_func_array('output_format_args', func_get_args());
@@ -37,7 +40,7 @@ function see() {
 function output_format_args() {
 	$final     = "";
 	$arguments = func_get_args();
-	if( is_array($arguments) && !empty($arguments) ) {
+	if( !empty($arguments) ) {
 		foreach( $arguments as $i => $argument ) {
 			$final .= sprintf("\n\n%'|21s Arg No. %-2s %'|43s\n\n", "", $i, "");
 			$argument = is_null($argument) ? "(null)null" : $argument;
@@ -58,5 +61,5 @@ function __is_cli() {
 		return IS_CLI;
 	}
 
-	return substr(strtolower(php_sapi_name()), 0, 3) == 'cli';
+	return stripos(PHP_SAPI, 'cli') === 0;
 }
