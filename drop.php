@@ -10,34 +10,29 @@
  * This is particularly helpful for looking into arrays and objects to see what information lies
  * within. This function will also kill the script after echoing the information. This function
  * takes any number of any typed arguments and displays them all.
- *
- * @return void
  */
-function drop() {
-
+function drop(...$args) : void {
 	if( __is_cli() === true ) {
 		echo "\033[2J\n";
 	}
 
-	call_user_func_array('see', func_get_args());
+	see(...$args);
 	die();
 }
 
 /**
  * A handy function to expose any number of any typed arguments while NOT killing the script
  * after output.
- *
- * @return void
  */
-function see() {
-	echo call_user_func_array('output_format_args', func_get_args());
+function see(...$args) : void {
+	echo output_format_args(...$args);
 }
 
 /**
  * A handy function to expose any number of any typed arguments while NOT killing the script
  * after output. Unlike drop(), this function must be "echoed".
  */
-function output_format_args() {
+function output_format_args() : string {
 	$final     = "";
 	$arguments = func_get_args();
 	if( !empty($arguments) ) {
@@ -56,7 +51,7 @@ function output_format_args() {
 	return "";
 }
 
-function __is_cli() {
+function __is_cli() : bool {
 	if( defined('IS_CLI') ) {
 		return IS_CLI;
 	}
