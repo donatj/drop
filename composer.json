@@ -2,7 +2,10 @@
 	"name": "donatj/drop",
 	"type": "library",
 	"description": "Simple debugging methods with CLI support",
-	"keywords": ["debugging", "drop"],
+	"keywords": [
+		"debugging",
+		"drop"
+	],
 	"license": "MIT",
 	"require": {
 		"php": ">=7.1"
@@ -22,5 +25,8 @@
 	],
 	"autoload": {
 		"files": [ "drop.php" ]
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^7.5"
 	}
 }
