@@ -3,6 +3,7 @@
 /**
  * @author Jon Henderson
  * @author Jesse G. Donat <donatj@gmail.com>
+ * @license MIT
  */
 
 namespace {
@@ -16,6 +17,7 @@ namespace {
 	 * takes any number of any typed arguments and displays them all.
 	 *
 	 * @param mixed ...$args
+	 * @return never
 	 */
 	function drop( ...$args ) : void {
 		if( is_cli() === true ) {
