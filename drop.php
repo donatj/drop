@@ -11,13 +11,13 @@ namespace {
 	use function donatj\drop\is_cli;
 
 	/**
-	 * A VERY handy function to empty output buffers and take any number of arguments and expose them.
+	 * A helpful function to empty output buffers and take any number of arguments and expose them.
 	 * This is particularly helpful for looking into arrays and objects to see what information lies
 	 * within. This function will also kill the script after echoing the information. This function
 	 * takes any number of any typed arguments and displays them all.
 	 *
-	 * @param mixed ...$args
-	 * @return never
+	 * @param mixed ...$args The arguments to expose the values of
+	 * @return never Exit's with status 1
 	 */
 	function drop( ...$args ) : void {
 		if( is_cli() === true ) {
@@ -43,9 +43,9 @@ namespace {
 namespace donatj\drop {
 
 	/**
-	 * A handy function to expose any number of any typed arguments while NOT killing the script
-	 * after output. Unlike drop(), this function must be "echoed".
+	 * This handles formatting the actual output of the arguments used in drop() and see()
 	 *
+	 * @internal This is not intended to be used directly
 	 * @param mixed ...$args
 	 * @return string
 	 */
@@ -68,6 +68,7 @@ namespace donatj\drop {
 	/**
 	 * Utility function for detecting CLI usage.
 	 *
+	 * @internal This is not intended to be used directly
 	 * @return bool
 	 */
 	function is_cli() : bool {

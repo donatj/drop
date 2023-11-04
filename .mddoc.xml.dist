@@ -1,0 +1,46 @@
+<mddoc>
+	<docpage target="README.md">
+
+		<autoloader type="psr4" root="src" namespace="Corpus\Di"/>
+		<autoloader type="psr4" root="vendor/psr/container/src" namespace="Psr\Container"/>
+
+		<section title="Drop">
+			<badge-poser type="version"/>
+			<badge-poser type="license"/>
+			<badge-github-action name="donatj/drop" workflow-file="ci.yml"/>
+
+			<text>> "The most effective debugging tool is still careful thought, coupled with judiciously placed print statements."
+>
+> — Brian Kernighan, "Unix for Beginners" (1979)
+			</text>
+
+			<text>While debugging small issues, you sometimes just want to see the contents of a variable or two. Firing up a full debugger can be overkill for quick problems, and `var_dump(…); exit(1);` is a little unwieldy and only accepts a single argument.</text>
+
+			<text>`drop()` is a simple debugging tool that allows you to drop one of more variable's contents in simple format that is friendly and readable on both web and CLI output.
+
+`see()` is similar to `drop()` but it does not halt execution.
+			</text>
+
+			<section title="Acknowledgements">
+				<text>This was based on the work of my friend [Jon Henderson](https://github.com/henderjon/drop) before it was given its own repo.</text>
+			</section>
+
+			<section title="Example">
+				<source name="examples/example.php" lang="php" />
+				<replace regex="true" search="/(?&lt;=```)[^|]+(?=\v\|)/" replace="">
+					<exec format="code-block" cmd="php examples/example.php" allow-error="true"/>
+				</replace>
+			</section>
+
+			<section title="Requirements">
+				<composer-requires/>
+			</section>
+			<section title="Installing">
+				<composer-install/>
+			</section>
+			<section title="Documentation">
+				<file name="drop.php"/>
+			</section>
+		</section>
+	</docpage>
+</mddoc>
