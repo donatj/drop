@@ -11,6 +11,8 @@
  * This is particularly helpful for looking into arrays and objects to see what information lies
  * within. This function will also kill the script after echoing the information. This function
  * takes any number of any typed arguments and displays them all.
+ *
+ * @return never
  */
 function drop() {
 
@@ -25,6 +27,8 @@ function drop() {
 /**
  * A handy function to expose any number of any typed arguments while NOT killing the script
  * after output.
+ *
+ * @return void
  */
 function see() {
 	echo call_user_func_array('output_format_args', func_get_args());
@@ -33,6 +37,8 @@ function see() {
 /**
  * A handy function to expose any number of any typed arguments while NOT killing the script
  * after output. Unlike drop(), this function must be "echoed".
+ *
+ * @return string
  */
 function output_format_args() {
 	$final     = "";
@@ -53,6 +59,9 @@ function output_format_args() {
 	return "";
 }
 
+/**
+ * @return bool
+ */
 function __is_cli() {
 	if( defined('IS_CLI') ) {
 		return IS_CLI;
